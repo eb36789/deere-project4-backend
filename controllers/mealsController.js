@@ -6,7 +6,7 @@ const MealModel = require("../models").Meal;
 const IngredientsModel = require("../models").Ingredients;
 
 
-// GET INDIVIDUAL MEAL INFO
+// GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/1
 router.get("/profile/:id", async (req, res) => {
     let meal = await MealModel.findByPk(req.params.id, 
     //   {
@@ -17,23 +17,23 @@ router.get("/profile/:id", async (req, res) => {
     res.json({ meal });
   });
   
-  // GET ALL MEALS
+  // GET ALL MEALS - localhost:3000/api/meals
   router.get("/", async (req, res) => {
     let meals = await MealModel.findAll({
-        include: IngredientsModel
+        // include: IngredientsModel
     })
     res.json({ meals });
   });
   
   
-  // CREATE A NEW MEAL
+  // CREATE A NEW MEAL - localhost:3000/api/meals/
   router.post("/", async (req, res) => {
     let meal = await MealModel.create(req.body);
     res.json({ meal });
   });
   module.exports = router;
   
-  // UPDATE A MEAL
+  // UPDATE A MEAL - localhost:3000/api/meals/XX
   router.put("/:id", async (req, res) => {
     let meal = await MealModel.update(req.body, {
       where: { id: req.params.id },
@@ -42,7 +42,7 @@ router.get("/profile/:id", async (req, res) => {
     res.json({ meal });
   });
   
-  // DELETE A MEAL
+  // DELETE A MEAL - localhost:3000/api/meals/XX
   router.delete("/:id", async (req, res) => {
     await MealModel.destroy({
       where: { id: req.params.id },
