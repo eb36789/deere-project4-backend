@@ -30,12 +30,12 @@ app.use(methodOverride("_method"));
 
 // HOMEPAGE
 app.get("/", (req, res) => {
-  res.json({ message: "Elizabeth's api app is working" });
+  res.json({ message: "Elizabeth's api app is still working dude" });
 });
 
 app.use("/api/auth", require("./controllers/authController.js"));
 app.use("/api/users", require("./controllers/usersController.js"));
 
 app.listen(process.env.PORT, () => {
-  console.log("Nodemon listening");
+  console.log("Yes, I am still running");
 });
