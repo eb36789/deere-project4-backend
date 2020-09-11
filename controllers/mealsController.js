@@ -7,7 +7,7 @@ const MealModel = require("../models").Meal;
 const IngredientsModel = require("../models").Ingredients;
 
 
-    // ADD A NEW INGREDIENT - localhost:3000/api/meals/26/newingredient
+    // ADD A NEW INGREDIENT - localhost:3000/api/meals/XX/newingredient
     router.post("/:id/newingredient", async (req, res) => {
       let meal = await MealModel.findByPk(req.params.id);
       req.body.mealId = req.params.id;
@@ -15,16 +15,9 @@ const IngredientsModel = require("../models").Ingredients;
       res.json({ meal, ingredient});
     });
 
-  //     // UPDATE ingredient - localhost:3000/api/meals/XX
-  // router.put("/:id", async (req, res) => {
-  //   let ingredient = await IngredientsModel.update(req.body, {
-  //     where: { id: req.params.id },
-  //     returning: true,
-  //   });
-  //   res.json({ ingredient });
-  // });
 
-// GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/1
+
+// GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/XX
 router.get("/profile/:id", async (req, res) => {
     let meal = await MealModel.findByPk(req.params.id, 
       {

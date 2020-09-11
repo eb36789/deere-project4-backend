@@ -36,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", require("./controllers/authController.js"));
 app.use("/api/users", require("./controllers/usersController.js"));
 app.use("/api/meals", require("./controllers/mealsController.js"));
+app.use("/api/ingredients", require("./controllers/ingredientsController.js"));
 
 app.listen(process.env.PORT, () => {
   console.log("Yes, I am still running");
