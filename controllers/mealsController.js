@@ -1,4 +1,5 @@
 const express = require("express");
+const meal = require("../models/meal");
 const router = express.Router();
 
 const UserModel = require("../models").User;
@@ -6,13 +7,30 @@ const MealModel = require("../models").Meal;
 const IngredientsModel = require("../models").Ingredients;
 
 
+    // ADD A NEW INGREDIENT - localhost:3000/api/meals/26/newingredient
+    router.post("/:id/newingredient", async (req, res) => {
+      let meal = await MealModel.findByPk(req.params.id);
+      req.body.mealId = req.params.id;
+      let ingredient = await IngredientsModel.create(req.body);
+      res.json({ meal, ingredient});
+    });
+
+  //     // UPDATE ingredient - localhost:3000/api/meals/XX
+  // router.put("/:id", async (req, res) => {
+  //   let ingredient = await IngredientsModel.update(req.body, {
+  //     where: { id: req.params.id },
+  //     returning: true,
+  //   });
+  //   res.json({ ingredient });
+  // });
+
 // GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/1
 router.get("/profile/:id", async (req, res) => {
     let meal = await MealModel.findByPk(req.params.id, 
-    //   {
-    //   include: IngredientsModel,
-    //   attributes: ["id", "amount", "measurement", "ingredient", ]
-    // }
+      {
+      include: {model: IngredientsModel,
+      attributes: ["amount", "measurement", "ingredient" ]}
+    }
     );
     res.json({ meal });
   });
@@ -20,10 +38,12 @@ router.get("/profile/:id", async (req, res) => {
   // GET ALL MEALS - localhost:3000/api/meals
   router.get("/", async (req, res) => {
     let meals = await MealModel.findAll({
-        // include: IngredientsModel
-    })
+       attributes: ["name", "time", "type", "id"],
+       include: {model: IngredientsModel,
+        attributes: ["amount", "measurement", "ingredient" ]}
+       });
     res.json({ meals });
-  });
+  })
   
   
   // CREATE A NEW MEAL - localhost:3000/api/meals/
@@ -52,10 +72,6 @@ router.get("/profile/:id", async (req, res) => {
     });
   });
 
-    // ADD A NEW INGREDIENT
-    router.post("/:id/newingredient", async (req, res) => {
-        let ingredient = await IngredientsModel.create(req.body)
-        res.json({ ingredient });
-      });
+  module.exports = router;
 
-module.exports = router;
+
