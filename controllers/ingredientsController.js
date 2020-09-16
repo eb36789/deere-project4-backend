@@ -16,7 +16,7 @@ const IngredientsModel = require("../models").Ingredients;
     res.json({ ingredient });
   });
 
-    // DELETE A MEAL - localhost:3000/api/ingredients/XX
+    // DELETE AN INGREDIENTgit add - localhost:3000/api/ingredients/XX
     router.delete("/:id", async (req, res) => {
         await IngredientsModel.destroy({
           where: { id: req.params.id },

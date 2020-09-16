@@ -39,5 +39,5 @@ app.use("/api/meals", require("./controllers/mealsController.js"));
 app.use("/api/ingredients", require("./controllers/ingredientsController.js"));
 
 app.listen(process.env.PORT, () => {
-  console.log("Yes, I am still running");
+  console.log("Yes, I am still running", process.env.PORT);
 });

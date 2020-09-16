@@ -15,9 +15,7 @@ const IngredientsModel = require("../models").Ingredients;
       res.json({ meal, ingredient});
     });
 
-
-
-// GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/XX
+  // GET INDIVIDUAL MEAL INFO - localhost:3000/api/meals/profile/XX
 router.get("/profile/:id", async (req, res) => {
     let meal = await MealModel.findByPk(req.params.id, 
       {
@@ -31,7 +29,7 @@ router.get("/profile/:id", async (req, res) => {
   // GET ALL MEALS - localhost:3000/api/meals
   router.get("/", async (req, res) => {
     let meals = await MealModel.findAll({
-       attributes: ["name", "time", "type", "id"],
+       attributes: ["name", "time", "type", "id", "image"],
        include: {model: IngredientsModel,
         attributes: ["amount", "measurement", "ingredient" ]}
        });
